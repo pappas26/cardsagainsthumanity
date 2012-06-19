@@ -2,6 +2,7 @@ package de.CardsAgainstHumanity.Client;
 
 import de.CardsAgainstHumanity.Server.Interfaces.Lobby;
 import de.CardsAgainstHumanity.Server.Interfaces.ServerInterface;
+import de.CardsAgainstHumanity.Server.Interfaces.SessionInterface;
 import de.root1.simon.Lookup;
 import de.root1.simon.Simon;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class Client {
     private ServerInterface server;
+    private SessionInterface session;
     private ClientCallbackImpl callback;
     private Lookup serverLookup;
     private String playerName = "";
@@ -47,18 +49,9 @@ public class Client {
     }
     
     public void connectToLobby(String s){
-        Lobby lobby = server.getLobby(s);
-        if(lobby != null){
-            int status = lobby.registerPlayer(playerName, callback);
-            if(status == Lobby.REGISTER_FAILED_LOBBY_FULL){
-                System.err.println("System: Lobby full");
-            }else if(status == Lobby.REGISTER_FAILED_NAME_ALLREADY_USED){
-                System.err.println("System: Playername TestPlayer allready in use");
-            }else{
-                System.out.println("System: Successfully connected to lobby "+s);
-            }
-        }else{
-            System.err.println("Couldn't find lobby with name "+s);
+        session = server.getSessionForLobby(s, playerName, callback);
+        if(session != null){
+            
         }
     }
 }

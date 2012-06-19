@@ -2,11 +2,11 @@ package de.CardsAgainstHumanity.Server;
 
 import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback;
 import de.CardsAgainstHumanity.Server.Interfaces.Lobby;
+import de.CardsAgainstHumanity.Server.Interfaces.SessionInterface;
 import de.root1.simon.annotation.SimonRemote;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -15,13 +15,14 @@ import java.util.Map;
 @SimonRemote(value = {Lobby.class})
 public class LobbyImpl implements Lobby{
 
+    private static final long serialVersionUID = 1L;
     
     public static enum Gametype{
         STANDARD;
     }
     
     private String lobbyName = "Cards against Humanity Lobby";
-    private Map<String,ClientCallback> playerMap;
+    private List<SessionInterface> playerList;
     private int maxPlayers;
     
     public LobbyImpl(String name, int playerCount){
@@ -30,37 +31,58 @@ public class LobbyImpl implements Lobby{
     }
     
     public LobbyImpl(){
-        playerMap = Collections.synchronizedMap(new HashMap<String,ClientCallback>());
+        playerList = Collections.synchronizedList(new ArrayList<SessionInterface>());
     }
 
     
     public void notifyShutdown(){
-        for(String s: playerMap.keySet()){
-            ClientCallback callback = playerMap.get(s);
+        for(SessionInterface s: playerList){
+            ClientCallback callback = s.getClientCallback();
             callback.sendSystemMessage("Server shutdown.");
             callback.disconnect();
         }
     }
     
     public void disconnectPlayer(String name){
-        if(!playerMap.containsKey(name)){
-            System.out.println("Player with "+name+" does not exist.");
-            return;
+        SessionInterface del = null;
+        for(SessionInterface s:playerList){
+            if(s.getUserName().equals(name)){
+                s.getClientCallback().sendSystemMessage("Disconnected");
+                s.getClientCallback().disconnect();
+                del = s;
+            }
         }
-        playerMap.get(name).disconnect();
-        playerMap.remove(name);
+        if(del != null){
+            for(SessionInterface s:playerList){
+                s.getClientCallback().sendMessage(del.getUserName()+" disconnected from the Lobby.");
+            }
+            playerList.remove(del);
+        }
     }
     
     @Override
-    public int registerPlayer(String name, ClientCallback callback) {
-        if(playerMap.size() >= maxPlayers){
-            return Lobby.REGISTER_FAILED_LOBBY_FULL;
-        }else if(playerMap.containsKey(name)){
-            return Lobby.REGISTER_FAILED_NAME_ALLREADY_USED;
+    public void addPlayer(SessionInterface newSession) {
+        playerList.add(newSession);
+        for(SessionInterface s:playerList){
+            s.getClientCallback().sendMessage(newSession.getUserName()+" joined the Lobby");
         }
-        System.out.println("LOBBY ["+lobbyName+"]: "+name+" joined the lobby!");
-        callback.sendMessage("Welcome to the lobby "+lobbyName);
-        playerMap.put(name, callback);
+    }
+
+    @Override
+    public void removePlayer(SessionInterface session) {
+        playerList.remove(session);
+    }
+    
+    @Override
+    public int canAddPlayer(String name) {
+        if(playerList.size() >= maxPlayers){
+            return Lobby.REGISTER_FAILED_LOBBY_FULL;
+        }
+        for(SessionInterface s:playerList){
+            if(s.getUserName().equals(name)){
+                return Lobby.REGISTER_FAILED_NAME_ALLREADY_USED;
+            }
+        }
         return Lobby.REGISTER_SUCCESS;
     }
     

@@ -28,7 +28,11 @@ public interface Lobby {
      * @param callback
      * @return 
      */
-    public int registerPlayer(String name, ClientCallback callback);
+    public int canAddPlayer(String name);
+    
+    public void addPlayer(SessionInterface session);
+    
+    public void removePlayer(SessionInterface session);
     
     public List<String> getPlayers();
     
