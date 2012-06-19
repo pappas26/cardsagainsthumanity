@@ -31,7 +31,7 @@ public class Session implements SessionInterface,  SimonUnreferenced, Serializab
     
     @Override
     public void unreferenced() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        lobby.removePlayer(this);
     }
 
     @Override
