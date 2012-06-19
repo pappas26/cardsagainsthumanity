@@ -37,6 +37,6 @@ public class ClientCallbackImpl implements ClientCallback, SimonUnreferenced{
 
     @Override
     public void unreferenced() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }
