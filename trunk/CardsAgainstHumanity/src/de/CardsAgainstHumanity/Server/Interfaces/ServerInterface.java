@@ -1,6 +1,5 @@
 package de.CardsAgainstHumanity.Server.Interfaces;
 
-import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
  */
 public interface ServerInterface {
     
-    public void registerPlayer(String name, ClientCallback callback);
+    public Lobby getLobby(String name);
     
-    public List<String> getPlayerList();
+    public List<String> getLobbyList();
 }

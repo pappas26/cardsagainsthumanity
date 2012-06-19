@@ -6,10 +6,9 @@ package de.CardsAgainstHumanity.Client.Interfaces;
  */
 public interface ClientCallback {
     
+    public void disconnect();
     
     public void sendMessage(String s);
     
     public void sendSystemMessage(String s);
-    
-    public void registerInfo(boolean success);
 }
