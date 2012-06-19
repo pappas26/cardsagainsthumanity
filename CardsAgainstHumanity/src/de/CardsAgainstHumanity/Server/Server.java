@@ -20,6 +20,8 @@ import java.util.Map;
 @SimonRemote(value = {ServerInterface.class})
 public class Server implements ServerInterface{
 
+    private static final long serialVersionUID = 1L;
+    
     public static final int SERVER_PORT = 25565;
     
     private Map<String,LobbyImpl> lobbyList;
@@ -68,9 +70,19 @@ public class Server implements ServerInterface{
     }
 
     @Override
-    public Lobby getLobby(String name){
+    public Session getSessionForLobby(String name, String user, ClientCallback callback){
         if(lobbyList.containsKey(name)){
-            return lobbyList.get(name);
+            Lobby lobby = lobbyList.get(name);
+            int status = lobby.canAddPlayer(user);
+            if(status == Lobby.REGISTER_FAILED_LOBBY_FULL){
+                callback.sendSystemMessage("Lobby "+name+" is full");
+            }else if(status == Lobby.REGISTER_FAILED_NAME_ALLREADY_USED){
+                callback.sendSystemMessage("Lobby "+name+" allready contains a player with name "+user);
+            }else if(status == Lobby.REGISTER_SUCCESS){
+                Session s = new Session(user,callback,lobby);
+                lobby.addPlayer(s);
+                return s;
+            }
         }
         return null;
     }
