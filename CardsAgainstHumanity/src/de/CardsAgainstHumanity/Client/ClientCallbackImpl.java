@@ -10,19 +10,24 @@ import de.root1.simon.annotation.SimonRemote;
 @SimonRemote(value = {ClientCallback.class})
 public class ClientCallbackImpl implements ClientCallback{
 
+    private Client c;
+    
+    public ClientCallbackImpl(Client c){
+        this.c = c;
+    }
+    
     @Override
     public void sendMessage(String s) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Message: "+s);
     }
 
     @Override
     public void sendSystemMessage(String s) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("System: "+s);
     }
 
     @Override
-    public void registerInfo(boolean success) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void disconnect() {
+        
     }
-    
 }
