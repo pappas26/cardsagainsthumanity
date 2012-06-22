@@ -37,20 +37,24 @@ public class MenueGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        menueGUIPanel = new javax.swing.JPanel();
         buttonPlayOnline = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cards Against Humanity");
         setBounds(new java.awt.Rectangle(0, 0, 800, 600));
+        setName("MainMenue"); // NOI18N
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel1.setAlignmentX(0.0F);
-        jPanel1.setAlignmentY(0.0F);
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menueGUIPanel.setName("menueGUIPanel");
+        menueGUIPanel.setBackground(new java.awt.Color(102, 153, 255));
+        menueGUIPanel.setAlignmentX(0.0F);
+        menueGUIPanel.setAlignmentY(0.0F);
+        menueGUIPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        menueGUIPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonPlayOnline.setText("play online");
         buttonPlayOnline.setAlignmentY(0.0F);
@@ -58,12 +62,12 @@ public class MenueGUI extends javax.swing.JFrame {
         buttonPlayOnline.setMaximumSize(new java.awt.Dimension(73, 23));
         buttonPlayOnline.setMinimumSize(new java.awt.Dimension(73, 23));
         buttonPlayOnline.setPreferredSize(new java.awt.Dimension(73, 23));
-        jPanel1.add(buttonPlayOnline, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 300, 90));
+        menueGUIPanel.add(buttonPlayOnline, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 300, 90));
 
         jButton1.setText("play offline");
         jButton1.setToolTipText("");
         jButton1.setIconTextGap(-140);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
+        menueGUIPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
 
         jButton2.setText("host game");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -71,49 +75,52 @@ public class MenueGUI extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
+        menueGUIPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
+
+        jButton3.setText("Exit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        menueGUIPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
+            .addComponent(menueGUIPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
+            .addComponent(menueGUIPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jPanel1.setVisible(false);
+        menueGUIPanel.setVisible(false);
         hostGUI.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPlayOnline;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel menueGUIPanel;
     // End of variables declaration//GEN-END:variables
 
     public void switchToMain(){
         for (JPanel jPanel : panels) {
             jPanel.setVisible(false);
         }
-        jPanel1.setVisible(true);
+        menueGUIPanel.setVisible(true);
     }
     
     private void addPanel(JPanel panel) {

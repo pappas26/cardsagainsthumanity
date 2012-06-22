@@ -35,7 +35,7 @@ public class ClientGUI {
             @Override
             public void run() {
                 gui = new MenueGUI();
-                gui.setTitle("test");
+                gui.setTitle("Cards Against Humanity");
                 gui.setVisible(true);
             }
         });
