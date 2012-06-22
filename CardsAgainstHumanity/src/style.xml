@@ -1,0 +1,144 @@
+
+<synth>  
+    <style id="basicStyle">
+        <font name="Verdana" size="12" style="BOLD"/>
+        <state>
+            <color value="BLACK" type="FOREGROUND"/>
+            <color value="WHITE" type="TEXT_BACKGROUND"/>
+        </state>
+    </style>
+    <bind style="basicStyle" type="region" key=".*"/>
+    <style id="buttonStyle">
+        <property key="Button.textShiftOffset" type="integer" value="1"/>
+        <insets top="0" left="0" right="0" bottom="0"/>
+        <state>
+            <imagePainter method="buttonBackground" path="gfx/button.png"
+					 sourceInsets="10 10 10 10"/>
+        </state>
+        <state value="PRESSED">
+            <imagePainter method="buttonBackground" path="gfx/buttonPress.png"
+					sourceInsets="10 10 10 10"/>
+        </state>
+        <state value="MOUSE_OVER">
+            <imagePainter method="buttonBackground" path="gfx/buttonHover.png"
+					sourceInsets="10 10 10 10"/>
+        </state>
+        <state value="DISABLED">
+            <imagePainter method="buttonBackground" path="gfx/buttonDisabled.png"
+					sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="buttonStyle" type="region" key="Button"/>
+
+    <style id="scrollbarStyle">
+        <insets top="16" left="25" right="25" bottom="15"/>
+        <state>
+            <opaque value="false"/>
+            <imagePainter method="scrollPaneBackground" path="gfx/scrollPanel.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>	
+    <bind style="scrollbarStyle" type="region" key="ScrollPane"/>
+    <style id="editorPane">
+        <state>    
+            <color value="#8b8b8b" type="BACKGROUND"/>
+        </state>
+    </style>	
+    <bind style="editorPane" type="region" key="ScrollPane"/>	
+    <style id="scrollBarArrowStyle">
+        <state>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_up.png" direction="north" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_down.png" direction="south" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_left.png" direction="west" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_right.png" direction="east" sourceInsets="0 0 0 0"/>
+        </state>
+        <state value="MOUSE_OVER">
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_up_h.png" direction="north" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_down_h.png" direction="south" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_left_h.png" direction="west" sourceInsets="0 0 0 0"/>
+            <imagePainter method="arrowButtonForeground" path="gfx/scrollBar_right_h.png" direction="east" sourceInsets="0 0 0 0"/>
+        </state>
+    </style>
+    <bind style="scrollBarArrowStyle" type="REGION" key="ArrowButton" />
+    <style id="mainPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/hexenzirkelWallpaper.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="mainPanelStyle" type="name" key="MainPanel"/>
+    <style id="settingsPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/settingsPanel.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="settingsPanelStyle" type="name" key="SettingsPanel"/>
+    <style id="errorPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/errorPanel.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="errorPanelStyle" type="name" key="ErrorPanel"/>
+    <style id="infoPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/errorPanel.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="infoPanelStyle" type="name" key="InfoPanel"/>
+    <style id="scrollBarThumbStyle">
+        <state>
+            <imagePainter method="scrollBarThumbBackground" direction="horizontal" path="gfx/scrollBarThumb_h.png" sourceInsets="0 7 0 7" />
+            <imagePainter method="scrollBarThumbBackground" direction="vertical" path="gfx/scrollBarThumb_v.png" sourceInsets="7 0 7 0" />
+        </state>
+        <state value="MOUSE_OVER">
+            <imagePainter method="scrollBarThumbBackground" direction="horizontal" path="gfx/scrollBarThumb_h_h.png" sourceInsets="0 7 0 7" />
+            <imagePainter method="scrollBarThumbBackground" direction="vertical" path="gfx/scrollBarThumb_v_h.png" sourceInsets="7 0 7 0" />
+        </state>
+    </style>
+    <bind style="scrollBarThumbStyle" type="REGION" key="ScrollBarThumb" />
+    <style id="scrollbarTrackStyle">
+        <state>
+            <imagePainter method="scrollBarTrackBackground" path="gfx/scrollBarTrack_h.png" direction="horizontal" sourceInsets="0 11 0 11" />
+            <imagePainter method="scrollBarTrackBackground" path="gfx/scrollBarTrack_v.png" direction="vertical" sourceInsets="11 0 11 0" />
+        </state>
+    </style>
+    <bind style="scrollbarTrackStyle" type="REGION" key="ScrollBarTrack" />
+    <style id="textfield">
+        <state>
+            <imagePainter method="textFieldBackground" path="gfx/textFeld.png" sourceInsets="2 2 2 2"/>
+        </state>
+        <state value = "DISABLED">
+            <imagePainter method="textFieldBackground" path="gfx/textFeldDisable.png" sourceInsets="2 2 2 2"/>
+        </state>
+    </style>
+    <bind style="textfield" type="region" key="TextField"/>
+    <style id="passwordField">
+        <state>
+            <imagePainter method="passwordFieldBackground" path="gfx/textFeld.png" sourceInsets="2 2 2 2"/>
+        </state>
+        <state value = "DISABLED">
+            <imagePainter method="passwordFieldBackground" path="gfx/textFeldDisable.png" sourceInsets="2 2 2 2"/>
+        </state>
+    </style>
+    <bind style="passwordField" type="region" key="PasswordField"/>
+    <style id="checkbox">
+        <imageIcon id="check_off" path="gfx/checkBox_off.png"/>
+        <imageIcon id="check_on" path="gfx/checkBox_on.png"/>
+        <imageIcon id="check_off_h" path="gfx/checkBox_off_h.png"/>
+        <imageIcon id="check_on_h" path="gfx/checkBox_on_h.png"/>
+        <property key="CheckBox.icon" value="check_off"/>
+        <state value="SELECTED">
+            <property key="CheckBox.icon" value="check_on"/>
+        </state>
+        <state value="SELECTED and MOUSE_OVER">
+            <property key="CheckBox.icon" value="check_on_h"/>
+        </state>
+        <state value="MOUSE_OVER">
+            <property key="CheckBox.icon" value="check_off_h"/>
+        </state>
+    </style>
+    <bind style="checkbox" type="region" key="Checkbox"/>
+</synth>
