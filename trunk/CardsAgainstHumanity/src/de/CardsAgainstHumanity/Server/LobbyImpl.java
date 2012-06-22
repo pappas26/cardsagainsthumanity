@@ -44,20 +44,22 @@ public class LobbyImpl implements Lobby{
     }
     
     public void disconnectPlayer(String name){
-        SessionInterface del = null;
+        SessionInterface del = getPlayerSession(name);
+        if(del != null){
+            del.getClientCallback().sendSystemMessage("Disconnected");
+            del.getClientCallback().disconnect();
+            playerList.remove(del);
+            broadcastMessage(del.getUserName()+" disconnected from the Lobby.");
+        }
+    }
+    
+    private SessionInterface getPlayerSession(String name){
         for(SessionInterface s:playerList){
             if(s.getUserName().equals(name)){
-                s.getClientCallback().sendSystemMessage("Disconnected");
-                s.getClientCallback().disconnect();
-                del = s;
+                return s;
             }
         }
-        if(del != null){
-            for(SessionInterface s:playerList){
-                s.getClientCallback().sendMessage(del.getUserName()+" disconnected from the Lobby.");
-            }
-            playerList.remove(del);
-        }
+        return null;
     }
     
     @Override
@@ -78,12 +80,25 @@ public class LobbyImpl implements Lobby{
         if(playerList.size() >= maxPlayers){
             return Lobby.REGISTER_FAILED_LOBBY_FULL;
         }
-        for(SessionInterface s:playerList){
-            if(s.getUserName().equals(name)){
-                return Lobby.REGISTER_FAILED_NAME_ALLREADY_USED;
-            }
+        if(getPlayerSession(name) != null){
+            return Lobby.REGISTER_FAILED_NAME_ALLREADY_USED;
         }
         return Lobby.REGISTER_SUCCESS;
+    }
+    
+    @Override
+    public void sendMessageToPlayer(String name, String message){
+        SessionInterface s = getPlayerSession(name);
+        if(s != null){
+            s.getClientCallback().sendMessage(message);
+        }
+    }
+    
+    @Override
+    public void broadcastMessage(String msg){
+        for(SessionInterface s:playerList){
+            s.getClientCallback().sendMessage(msg);
+        }
     }
     
     @Override
