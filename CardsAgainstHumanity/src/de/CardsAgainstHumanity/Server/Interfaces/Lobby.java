@@ -34,6 +34,10 @@ public interface Lobby {
     
     public void removePlayer(SessionInterface session);
     
+    public void sendMessageToPlayer(String player, String msg);
+    
+    public void broadcastMessage(String msg);
+    
     public List<String> getPlayers();
     
     public Gametype getGametype();
