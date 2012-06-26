@@ -15,7 +15,7 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 public class ClientGUI {
     private static final String LOOK_AND_FEEL_STYLE_PATH = "style.xml";
     
-    private MenueGUI gui;
+    private MainGUI gui;
     
     /**
      * Initializes all gui components.
@@ -34,7 +34,7 @@ public class ClientGUI {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gui = new MenueGUI();
+                gui = new MainGUI();
                 gui.setTitle("Cards Against Humanity");
                 gui.setVisible(true);
             }
