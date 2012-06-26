@@ -62,11 +62,18 @@
     <bind style="scrollBarArrowStyle" type="REGION" key="ArrowButton" />
     <style id="mainPanelStyle">
         <state>
-            <imagePainter method="panelBackground" path="gfx/CAHBackground.png"
+            <imagePainter method="panelBackground" path="gfx/CAHMainBackground.png"
 								 sourceInsets="10 10 10 10"/>
         </state>
     </style>
-    <bind style="mainPanelStyle" type="name" key="menueGUIPanel"/>
+    <bind style="mainPanelStyle" type="name" key="mainPanel"/>
+    <style id="hostPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/CAHHostBackground.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="hostPanelStyle" type="name" key="hostPanel"/>
     <style id="settingsPanelStyle">
         <state>
             <imagePainter method="panelBackground" path="gfx/settingsPanel.png"
