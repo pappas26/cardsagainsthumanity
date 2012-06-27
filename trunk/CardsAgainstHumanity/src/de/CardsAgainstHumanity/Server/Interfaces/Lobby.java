@@ -1,6 +1,5 @@
 package de.CardsAgainstHumanity.Server.Interfaces;
 
-import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback;
 import java.util.List;
 
 /**
@@ -37,6 +36,12 @@ public interface Lobby {
     public void sendMessageToPlayer(String player, String msg);
     
     public void broadcastMessage(String msg);
+    
+    public void startGame();
+    
+    public void stopGame();
+    
+    public boolean isGameRunning();
     
     public List<String> getPlayers();
     

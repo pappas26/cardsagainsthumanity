@@ -1,6 +1,7 @@
 package de.CardsAgainstHumanity.Client.Gui;
 
 import de.CardsAgainstHumanity.Main;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

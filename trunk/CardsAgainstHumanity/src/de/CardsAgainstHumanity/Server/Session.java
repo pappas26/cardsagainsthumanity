@@ -48,4 +48,9 @@ public class Session implements SessionInterface,  SimonUnreferenced, Serializab
     public String getUserName() {
         return user;
     }
+    
+    @Override
+    public Lobby getLobby(){
+        return lobby;
+    }
 }

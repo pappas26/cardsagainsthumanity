@@ -13,4 +13,6 @@ public interface SessionInterface {
     public ClientCallback getClientCallback();
     
     public String getUserName();
+    
+    public Lobby getLobby();
 }

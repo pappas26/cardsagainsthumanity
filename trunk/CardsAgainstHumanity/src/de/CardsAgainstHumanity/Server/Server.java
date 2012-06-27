@@ -1,17 +1,13 @@
 package de.CardsAgainstHumanity.Server;
 
-import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback;
+import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback; 
 import de.CardsAgainstHumanity.Server.Errors.LobbyException;
 import de.CardsAgainstHumanity.Server.Interfaces.Lobby;
 import de.CardsAgainstHumanity.Server.Interfaces.ServerInterface;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
 import de.root1.simon.annotation.SimonRemote;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map; 
+import java.util.*;
 
 /**
  *
@@ -32,8 +28,12 @@ public class Server implements ServerInterface{
     }
     
     public boolean startServer(){
+        return startServer(SERVER_PORT);
+    }
+    
+    public boolean startServer(int port){
         try {
-            registry = Simon.createRegistry(SERVER_PORT);
+            registry = Simon.createRegistry(port);
             registry.bind("CAH_server", this);
             return true;
         } catch (Exception ex) {

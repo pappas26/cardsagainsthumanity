@@ -39,4 +39,29 @@ public class ClientCallbackImpl implements ClientCallback, SimonUnreferenced{
     public void unreferenced() {
         
     }
+
+    @Override
+    public void giveCard(String text) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void sendCardInformation(String text, String player) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void synchronizeGameTime(long time) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void startRound(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void startGame(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
