@@ -115,4 +115,20 @@ public class LobbyImpl implements Lobby{
     public String getLobbyName(){
         return lobbyName;
     }
+    
+
+    @Override
+    public void startGame() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void stopGame() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isGameRunning() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
