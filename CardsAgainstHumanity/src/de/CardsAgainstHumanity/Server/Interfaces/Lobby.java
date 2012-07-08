@@ -14,6 +14,22 @@ public interface Lobby {
     
     public static enum Gametype{
         STANDARD;
+        
+        public static Gametype fromString(String type){
+            if(type.equals("Standard")){
+                return STANDARD;
+            }
+            return null;
+        }
+        
+        public static String toString(Gametype type){
+            switch(type){
+                case STANDARD:
+                    return "Standard";
+                default:
+                    return "null";
+            }
+        }
     }
     
     /**

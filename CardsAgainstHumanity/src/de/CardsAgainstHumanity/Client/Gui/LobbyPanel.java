@@ -1,15 +1,17 @@
 
 package de.CardsAgainstHumanity.Client.Gui;
 
+import de.CardsAgainstHumanity.Main;
 import java.awt.Graphics;
+import javax.swing.JOptionPane;
 
 public class LobbyPanel extends javax.swing.JPanel{
-    LobbyListGUI parent;
-    String name;
-    String gameMode;
-    int maxPlayer;
-    int curPlayer;
-    /** Creates new form LobbyPanel */
+    private LobbyListGUI parent;
+    private String name;
+    private String gameMode;
+    private int maxPlayer;
+    private int curPlayer;
+    
     public LobbyPanel(LobbyListGUI parent,String name, int maxPlayer) {
         this(parent, name, maxPlayer, "normal");
     }
@@ -80,9 +82,11 @@ public class LobbyPanel extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        parent.removeLobby(this);
-        
-        //TODO KILL LOBBY
+        if(Main.client.closeLobby(name)){
+            parent.removeLobby(this);
+        }else{
+            JOptionPane.showMessageDialog(this, "An error occured while closing a lobby.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonJoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonJoinActionPerformed

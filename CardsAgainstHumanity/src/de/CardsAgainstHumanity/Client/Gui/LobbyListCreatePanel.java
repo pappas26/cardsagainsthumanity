@@ -1,24 +1,42 @@
 
 package de.CardsAgainstHumanity.Client.Gui;
 
+import de.CardsAgainstHumanity.Main;
+import de.CardsAgainstHumanity.Server.Interfaces.Lobby;
+import de.CardsAgainstHumanity.Server.Interfaces.Lobby.Gametype;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 public class LobbyListCreatePanel extends javax.swing.JPanel {
-    LobbyListGUI parent;
-    /** Creates new form LobbyListCreatePanel */
+    private LobbyListGUI parent;
+    private DefaultListModel dlm;
+    
     public LobbyListCreatePanel(LobbyListGUI parent) {
         initComponents();
         this.parent = parent;
+        fillList();
+    }
+    
+    private void fillList(){
+        Gametype [] gametypes = Lobby.Gametype.values();
+        dlm = new DefaultListModel();
+        for(Gametype g:gametypes){
+            dlm.addElement(Gametype.toString(g));
+        }
+        gametypeList.setModel(dlm);
+        gametypeList.setSelectedIndex(0);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonCreate = new javax.swing.JButton();
+        createBtn = new javax.swing.JButton();
         spinnerMaxPlayers = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
-        textFieldLobbyName = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        maxPlayerLabel = new javax.swing.JLabel();
+        lobbyNameField = new javax.swing.JTextField();
+        gametypeScroll = new javax.swing.JScrollPane();
+        gametypeList = new javax.swing.JList();
 
         setBackground(new java.awt.Color(255, 153, 0));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -27,44 +45,42 @@ public class LobbyListCreatePanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(650, 85));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonCreate.setText("create Lobby");
-        buttonCreate.addActionListener(new java.awt.event.ActionListener() {
+        createBtn.setText("Create Lobby");
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCreateActionPerformed(evt);
+                createBtnActionPerformed(evt);
             }
         });
-        add(buttonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 40));
+        add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 40));
         add(spinnerMaxPlayers, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 40, -1));
 
-        jLabel1.setText("max Players");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, 20));
+        maxPlayerLabel.setText("max Players");
+        add(maxPlayerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, 20));
 
-        textFieldLobbyName.setText("enter Lobby Name");
-        add(textFieldLobbyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, -1));
+        lobbyNameField.setText("Lobby1");
+        add(lobbyNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, -1));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Gametype"));
+        gametypeScroll.setBorder(javax.swing.BorderFactory.createTitledBorder("Gametype"));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "normal", "hardcore", "etc..." };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        gametypeScroll.setViewportView(gametypeList);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 170, 60));
+        add(gametypeScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 170, 60));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCreateActionPerformed
-        parent.addLobby(new LobbyPanel(parent, textFieldLobbyName.getText(),(Integer)spinnerMaxPlayers.getValue(),jList1.getSelectedValue().toString()));
-        //TODO START LOBBY
-    }//GEN-LAST:event_buttonCreateActionPerformed
+    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+        if(Main.client.createLobby(lobbyNameField.getText(), (Integer)spinnerMaxPlayers.getValue(), Gametype.fromString(gametypeList.getSelectedValue().toString()))){
+            parent.addLobby(new LobbyPanel(parent, lobbyNameField.getText(),(Integer)spinnerMaxPlayers.getValue(),gametypeList.getSelectedValue().toString()));
+        }else{
+            JOptionPane.showMessageDialog(this, "An error occured while creating a new lobby.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_createBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCreate;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton createBtn;
+    private javax.swing.JList gametypeList;
+    private javax.swing.JScrollPane gametypeScroll;
+    private javax.swing.JTextField lobbyNameField;
+    private javax.swing.JLabel maxPlayerLabel;
     private javax.swing.JSpinner spinnerMaxPlayers;
-    private javax.swing.JTextField textFieldLobbyName;
     // End of variables declaration//GEN-END:variables
 }

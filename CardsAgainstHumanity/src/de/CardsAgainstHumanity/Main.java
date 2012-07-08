@@ -9,8 +9,11 @@ import java.io.InputStreamReader;
 
 public class Main {
 
+    public static Client client;
+    
     public static void main(String[] args) throws IOException, LobbyException {
-        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        client = new Client("Player");
+        /*BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Cards against Humanity - Test");
         String line = "";
         Server s = null;
@@ -51,5 +54,6 @@ public class Main {
                 }
             }
         }
+         */
     }
 }

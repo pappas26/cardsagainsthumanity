@@ -1,4 +1,3 @@
-
 package de.CardsAgainstHumanity.Client.Gui;
 
 import java.util.ArrayList;
@@ -6,20 +5,62 @@ import java.util.List;
 import javax.swing.JPanel;
 
 public class MainGUI extends javax.swing.JFrame {
+
     public static final String HOSTPANEL = "hostPanel";
     public static final String LOBBYLISTPANEL = "lobbyListPanel";
-    
     private static List<JPanel> panels = new ArrayList<JPanel>();
-    
     private LobbyListGUI lobbyList = new LobbyListGUI(this);
-    private HostGUI hostGUI= new HostGUI(this);
-    
-    /** Creates new form MainGUI */
+    private HostGUI hostGUI = new HostGUI(this);
+
     public MainGUI() {
         initComponents();
         panels.add(mainPanel);
-        addPanel(hostGUI,HOSTPANEL);
+        addPanel(hostGUI, HOSTPANEL);
         addPanel(lobbyList, LOBBYLISTPANEL);
+    }
+
+    public void switchToMain() {
+        for (JPanel jPanel : panels) {
+            jPanel.setVisible(false);
+        }
+        mainPanel.setVisible(true);
+    }
+
+    public void switchToPanel(String name) {
+
+        JPanel tmp = null;
+        for (JPanel jPanel : panels) {
+            if (jPanel.getName().equals(name)) {
+                tmp = jPanel;
+            } else {
+                jPanel.setVisible(false);
+            }
+        }
+
+        try {
+            add2Layout(tmp);
+            tmp.setVisible(true);
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void addPanel(JPanel panel, String name) {
+        this.add(panel);
+        panel.setName(name);
+        panels.add(panel);
+        panel.setVisible(false);
+    }
+
+    private void add2Layout(JPanel panel) {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 800, Short.MAX_VALUE).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(0, 0, 0).addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGap(0, 0, 0))));
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 600, Short.MAX_VALUE).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(0, 0, 0).addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGap(0, 0, 0))));
+        panel.setVisible(false);
+        pack();
     }
 
     @SuppressWarnings("unchecked")
@@ -28,9 +69,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         buttonPlayOnline = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        offlineBtn = new javax.swing.JButton();
+        hostBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cards Against Humanity");
@@ -53,26 +94,26 @@ public class MainGUI extends javax.swing.JFrame {
         buttonPlayOnline.setPreferredSize(new java.awt.Dimension(73, 23));
         mainPanel.add(buttonPlayOnline, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 300, 90));
 
-        jButton1.setText("play offline");
-        jButton1.setToolTipText("");
-        jButton1.setIconTextGap(-140);
-        mainPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
+        offlineBtn.setText("play offline");
+        offlineBtn.setToolTipText("");
+        offlineBtn.setIconTextGap(-140);
+        mainPanel.add(offlineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
 
-        jButton2.setText("host game");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        hostBtn.setText("host game");
+        hostBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                hostBtnActionPerformed(evt);
             }
         });
-        mainPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
+        mainPanel.add(hostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
 
-        jButton3.setText("Exit");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
-        mainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, 50));
+        mainPanel.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,76 +129,18 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+    private void hostBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hostBtnActionPerformed
         switchToPanel(HOSTPANEL);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_hostBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
-    
+    }//GEN-LAST:event_exitBtnActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPlayOnline;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton hostBtn;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton offlineBtn;
     // End of variables declaration//GEN-END:variables
-
-    public void switchToMain(){
-        for (JPanel jPanel : panels) {
-            jPanel.setVisible(false);
-        }
-        mainPanel.setVisible(true);
-    }
-    public void switchToPanel(String name){
-        
-        JPanel tmp = null;
-        for (JPanel jPanel : panels) {
-            if (jPanel.getName().equals(name)) {
-                tmp = jPanel;
-            } else {
-                jPanel.setVisible(false);
-            }
-        }
-        
-        try{
-            add2Layout(tmp);
-            tmp.setVisible(true);
-        }catch(NullPointerException ex ){
-            System.out.println(name + " existiert nicht");
-        }
-    }
-    private void addPanel(JPanel panel,String name) {
-        this.add(panel);
-        panel.setName(name);
-        panels.add(panel);
-        panel.setVisible(false);
-        
-    }
-    private void add2Layout(JPanel panel){
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
-        );
-        panel.setVisible(false);
-        pack();
-    }
 }
