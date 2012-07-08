@@ -10,6 +10,9 @@
  */
 package de.CardsAgainstHumanity.Client.Gui;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 /**
@@ -18,12 +21,19 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
  */
 public class LobbyListGUI extends javax.swing.JPanel {
     MainGUI parent;
+    List<JPanel> panels = new ArrayList<JPanel>();
+    private LobbyListCreatePanel createPanel = new LobbyListCreatePanel(this);
     /** Creates new form LobbyListGUI */
     public LobbyListGUI(MainGUI parent) {
         initComponents();
-        for (int i = 0; i < 10; i++) {
-            jPanel1.add(new LobbyPanel(), new AbsoluteConstraints(0, i*65, -1, -1));
-       
+            for (int i = 0; i < 5; i++) {
+                panels.add(new LobbyPanel(this,"Lobby "+i, 5));
+        }
+           panels.add(createPanel);
+           int i = 0;
+        for (JPanel jPanel : panels) {
+            panelListContainer.add(jPanel, new AbsoluteConstraints(0, i * 85, -1, -1));
+            i++;
         }
     }
 
@@ -37,22 +47,22 @@ public class LobbyListGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textAreaNews = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panelListContainer = new javax.swing.JPanel();
+        labelHeader = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(51, 153, 255));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("lobbyListPanel"); // NOI18N
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Servernachricht an alle Lobbys: Hallo Welt, viel spaß mit Cards against Humanity");
-        jTextArea1.setFocusable(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        textAreaNews.setColumns(20);
+        textAreaNews.setEditable(false);
+        textAreaNews.setRows(5);
+        textAreaNews.setText("Servernachricht an alle Lobbys: Hallo Welt, viel spaß mit Cards against Humanity");
+        textAreaNews.setFocusable(false);
+        jScrollPane1.setViewportView(textAreaNews);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 720, 110));
 
@@ -60,21 +70,48 @@ public class LobbyListGUI extends javax.swing.JPanel {
         jScrollPane2.setToolTipText("");
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jScrollPane2.setViewportView(jPanel1);
+        panelListContainer.setBackground(new java.awt.Color(255, 255, 102));
+        panelListContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jScrollPane2.setViewportView(panelListContainer);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 760, 370));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("your Lobbys");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
+        labelHeader.setFont(new java.awt.Font("Tahoma", 1, 18));
+        labelHeader.setText("your Lobbys");
+        add(labelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelHeader;
+    private javax.swing.JPanel panelListContainer;
+    private javax.swing.JTextArea textAreaNews;
     // End of variables declaration//GEN-END:variables
+
+    void removeLobby(LobbyPanel aThis) {
+        panels.remove(aThis);
+        panelListContainer.removeAll();
+        int i = 0;
+        for (JPanel jPanel : panels) {
+            panelListContainer.add(jPanel, new AbsoluteConstraints(0, i * 85, -1, -1));
+            i++;
+        }
+        jScrollPane2.updateUI();
+    }
+
+    void addLobby(LobbyPanel newLobby) {
+        panels.remove(createPanel);
+        panels.add(newLobby);
+        panels.add(createPanel);
+        panelListContainer.removeAll();
+        int i = 0;
+        for (JPanel jPanel : panels) {
+            panelListContainer.add(jPanel, new AbsoluteConstraints(0, i * 85, -1, -1));
+            i++;
+        }
+        jScrollPane2.updateUI();
+    }
+
+    
+   
 }
