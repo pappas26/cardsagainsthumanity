@@ -137,7 +137,7 @@ public class LobbyListGUI extends javax.swing.JPanel {
     }
 
     private void loadLobbys() {
-        if (panels.size() == 0 && !isHost) {
+        if (panels.isEmpty() && !isHost) {
             textAreaNews.setText("Keine News vorhanden");
         }
     }
