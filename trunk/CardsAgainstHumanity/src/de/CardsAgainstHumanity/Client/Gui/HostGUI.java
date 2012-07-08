@@ -4,7 +4,7 @@ package de.CardsAgainstHumanity.Client.Gui;
 import de.CardsAgainstHumanity.Main;
 
 public class HostGUI extends javax.swing.JPanel {
-    private MainGUI parent;
+    protected  MainGUI parent;
     
     public HostGUI(MainGUI parent) {
         initComponents();
@@ -18,7 +18,7 @@ public class HostGUI extends javax.swing.JPanel {
         backBtn = new javax.swing.JButton();
         portField = new javax.swing.JTextField();
         portLabel = new javax.swing.JLabel();
-        startServerBtn = new javax.swing.JButton();
+        buttonStartServer = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
         setAlignmentX(0.0F);
@@ -44,34 +44,36 @@ public class HostGUI extends javax.swing.JPanel {
         portField.setMargin(new java.awt.Insets(4, 4, 4, 4));
         add(portField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 400, 30));
 
-        portLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        portLabel.setFont(new java.awt.Font("Tahoma", 1, 18));
         portLabel.setForeground(new java.awt.Color(255, 255, 255));
         portLabel.setText("Port:");
         portLabel.setAlignmentY(0.0F);
         add(portLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 60, 20));
 
-        startServerBtn.setText("Start Server!");
-        startServerBtn.addActionListener(new java.awt.event.ActionListener() {
+        buttonStartServer.setText("Start Server!");
+        buttonStartServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startServerBtnActionPerformed(evt);
+                buttonStartServerActionPerformed(evt);
             }
         });
-        add(startServerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 100, 50));
+        add(buttonStartServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 100, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         parent.switchToMain();
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void startServerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startServerBtnActionPerformed
-        parent.switchToPanel(MainGUI.LOBBYLISTPANEL);
+    private void buttonStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartServerActionPerformed
+        parent.switchToPanel(MainGUI.LOBBYLISTHOSTPANEL);
         Main.client.hostServer(Integer.valueOf(portField.getText()));
-    }//GEN-LAST:event_startServerBtnActionPerformed
+    }//GEN-LAST:event_buttonStartServerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    protected javax.swing.JButton buttonStartServer;
     private javax.swing.JTextField portField;
     private javax.swing.JLabel portLabel;
-    private javax.swing.JButton startServerBtn;
     // End of variables declaration//GEN-END:variables
+   
+
 }

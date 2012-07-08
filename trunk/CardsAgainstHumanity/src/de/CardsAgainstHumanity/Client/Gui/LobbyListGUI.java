@@ -21,22 +21,32 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
  * @author schlefix
  */
 public class LobbyListGUI extends javax.swing.JPanel {
-    private MainGUI parent;
-    private List<JPanel> panels = new ArrayList<JPanel>();
+
+    MainGUI parent;
+    String link;
+    boolean isHost;
+    List<JPanel> panels = new ArrayList<JPanel>();
     private LobbyListCreatePanel createPanel = new LobbyListCreatePanel(this);
-    /** Creates new form LobbyListGUI */
-    public LobbyListGUI(MainGUI parent) {
+
+    public LobbyListGUI(MainGUI parent, String link, boolean isHost) {
         initComponents();
-           this.parent=parent;
-           panels.add(createPanel);
-           int i = 0;
+        this.parent = parent;
+        this.link = link;
+        this.isHost = isHost;
+        if (isHost) {
+            panels.add(createPanel);
+
+        } else {
+            buttonBack.setText("back");
+        }
+        loadLobbys();
+        int i = 0;
         for (JPanel jPanel : panels) {
             panelListContainer.add(jPanel, new AbsoluteConstraints(0, i * 85, -1, -1));
             i++;
         }
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,10 +96,13 @@ public class LobbyListGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
-        Main.client.stopServer();
-        parent.switchToMain();
+        if (isHost) {
+            Main.client.stopServer();
+            parent.switchToMain();
+        } else {
+            parent.switchToPanel(link);
+        }
     }//GEN-LAST:event_buttonBackActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBack;
     private javax.swing.JScrollPane jScrollPane1;
@@ -123,6 +136,9 @@ public class LobbyListGUI extends javax.swing.JPanel {
         jScrollPane2.updateUI();
     }
 
-    
-   
+    private void loadLobbys() {
+        if (panels.size() == 0 && !isHost) {
+            textAreaNews.setText("Keine News vorhanden");
+        }
+    }
 }
