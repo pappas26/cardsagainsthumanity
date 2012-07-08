@@ -10,6 +10,7 @@
  */
 package de.CardsAgainstHumanity.Client.Gui;
 
+import de.CardsAgainstHumanity.Main;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -20,8 +21,8 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
  * @author schlefix
  */
 public class LobbyListGUI extends javax.swing.JPanel {
-    MainGUI parent;
-    List<JPanel> panels = new ArrayList<JPanel>();
+    private MainGUI parent;
+    private List<JPanel> panels = new ArrayList<JPanel>();
     private LobbyListCreatePanel createPanel = new LobbyListCreatePanel(this);
     /** Creates new form LobbyListGUI */
     public LobbyListGUI(MainGUI parent) {
@@ -75,7 +76,7 @@ public class LobbyListGUI extends javax.swing.JPanel {
         labelHeader.setText("your Lobbys");
         add(labelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
-        buttonBack.setText("back");
+        buttonBack.setText("Stop server");
         buttonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBackActionPerformed(evt);
@@ -85,7 +86,8 @@ public class LobbyListGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
-        parent.switchToPanel(MainGUI.HOSTPANEL);
+        Main.client.stopServer();
+        parent.switchToMain();
     }//GEN-LAST:event_buttonBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

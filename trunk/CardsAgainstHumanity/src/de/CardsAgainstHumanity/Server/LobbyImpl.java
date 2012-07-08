@@ -24,10 +24,12 @@ public class LobbyImpl implements Lobby{
     private String lobbyName = "Cards against Humanity Lobby";
     private List<SessionInterface> playerList;
     private int maxPlayers;
+    private Lobby.Gametype gametype;
     
-    public LobbyImpl(String name, int playerCount){
+    public LobbyImpl(String name, int playerCount, Lobby.Gametype gametype){
         this();
         maxPlayers = playerCount;
+        this.gametype = gametype;
     }
     
     public LobbyImpl(){
@@ -108,7 +110,7 @@ public class LobbyImpl implements Lobby{
     
     @Override
     public Lobby.Gametype getGametype(){
-        return Lobby.Gametype.STANDARD;
+        return gametype;
     }
     
     @Override

@@ -3,6 +3,7 @@ package de.CardsAgainstHumanity.Server;
 import de.CardsAgainstHumanity.Client.Interfaces.ClientCallback; 
 import de.CardsAgainstHumanity.Server.Errors.LobbyException;
 import de.CardsAgainstHumanity.Server.Interfaces.Lobby;
+import de.CardsAgainstHumanity.Server.Interfaces.Lobby.Gametype;
 import de.CardsAgainstHumanity.Server.Interfaces.ServerInterface;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -54,11 +55,11 @@ public class Server implements ServerInterface{
         registry.stop();
     }
     
-    public void createLobby(String name,int playerCount) throws LobbyException{
+    public void createLobby(String name,int playerCount, Gametype gametype) throws LobbyException{
         if(lobbyList.containsKey(name)){
             throw new LobbyException("Lobby with name "+name+" allready exists!");
         }
-        LobbyImpl lobby = new LobbyImpl(name,playerCount);
+        LobbyImpl lobby = new LobbyImpl(name,playerCount,gametype);
         lobbyList.put(name, lobby);
     }
     
@@ -91,5 +92,4 @@ public class Server implements ServerInterface{
     public List<String> getLobbyList() {
         return new ArrayList<String>(lobbyList.keySet());
     }
-    
 }
