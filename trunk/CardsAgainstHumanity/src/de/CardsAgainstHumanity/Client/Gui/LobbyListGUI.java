@@ -26,9 +26,7 @@ public class LobbyListGUI extends javax.swing.JPanel {
     /** Creates new form LobbyListGUI */
     public LobbyListGUI(MainGUI parent) {
         initComponents();
-            for (int i = 0; i < 5; i++) {
-                panels.add(new LobbyPanel(this,"Lobby "+i, 5));
-        }
+           
            panels.add(createPanel);
            int i = 0;
         for (JPanel jPanel : panels) {
