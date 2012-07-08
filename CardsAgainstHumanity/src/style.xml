@@ -74,6 +74,13 @@
         </state>
     </style>
     <bind style="hostPanelStyle" type="name" key="hostPanel"/>
+    <style id="joinPanelStyle">
+        <state>
+            <imagePainter method="panelBackground" path="gfx/CAHHostBackground.png"
+								 sourceInsets="10 10 10 10"/>
+        </state>
+    </style>
+    <bind style="joinPanelStyle" type="name" key="joinPanel"/>
     <style id="settingsPanelStyle">
         <state>
             <imagePainter method="panelBackground" path="gfx/settingsPanel.png"

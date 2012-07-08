@@ -7,16 +7,23 @@ import javax.swing.JPanel;
 public class MainGUI extends javax.swing.JFrame {
 
     public static final String HOSTPANEL = "hostPanel";
-    public static final String LOBBYLISTPANEL = "lobbyListPanel";
+    public static final String LOBBYLISTHOSTPANEL = "lobbyListHostPanel";
+    public static final String LOBBYLISTJOINPANEL = "lobbyListJoinPanel";
+    public static final String JOINPANEL = "joinPanel";
     private static List<JPanel> panels = new ArrayList<JPanel>();
-    private LobbyListGUI lobbyList = new LobbyListGUI(this);
-    private HostGUI hostGUI = new HostGUI(this);
-
+    private LobbyListGUI lobbyListHost = new LobbyListGUI(this,HOSTPANEL,true);
+    private LobbyListGUI lobbyListJoin = new LobbyListGUI(this,JOINPANEL,false);
+    private HostGUI hostGUI= new HostGUI(this);
+    private JoinGUI joinGUI = new JoinGUI(this);
+    
+    /** Creates new form MainGUI */
     public MainGUI() {
         initComponents();
         panels.add(mainPanel);
         addPanel(hostGUI, HOSTPANEL);
-        addPanel(lobbyList, LOBBYLISTPANEL);
+        addPanel(lobbyListHost, LOBBYLISTHOSTPANEL);
+        addPanel(lobbyListJoin, LOBBYLISTJOINPANEL);
+        addPanel(joinGUI, JOINPANEL);
     }
 
     public void switchToMain() {
@@ -69,9 +76,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         buttonPlayOnline = new javax.swing.JButton();
-        offlineBtn = new javax.swing.JButton();
-        hostBtn = new javax.swing.JButton();
-        exitBtn = new javax.swing.JButton();
+        buttonPlayOff = new javax.swing.JButton();
+        buttonHost = new javax.swing.JButton();
+        buttonExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cards Against Humanity");
@@ -92,28 +99,33 @@ public class MainGUI extends javax.swing.JFrame {
         buttonPlayOnline.setMaximumSize(new java.awt.Dimension(73, 23));
         buttonPlayOnline.setMinimumSize(new java.awt.Dimension(73, 23));
         buttonPlayOnline.setPreferredSize(new java.awt.Dimension(73, 23));
+        buttonPlayOnline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPlayOnlineActionPerformed(evt);
+            }
+        });
         mainPanel.add(buttonPlayOnline, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 300, 90));
 
-        offlineBtn.setText("play offline");
-        offlineBtn.setToolTipText("");
-        offlineBtn.setIconTextGap(-140);
-        mainPanel.add(offlineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
+        buttonPlayOff.setText("play offline");
+        buttonPlayOff.setToolTipText("");
+        buttonPlayOff.setIconTextGap(-140);
+        mainPanel.add(buttonPlayOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 140, 50));
 
-        hostBtn.setText("host game");
-        hostBtn.addActionListener(new java.awt.event.ActionListener() {
+        buttonHost.setText("host game");
+        buttonHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hostBtnActionPerformed(evt);
+                buttonHostActionPerformed(evt);
             }
         });
-        mainPanel.add(hostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
+        mainPanel.add(buttonHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 50));
 
-        exitBtn.setText("Exit");
-        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+        buttonExit.setText("Exit");
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitBtnActionPerformed(evt);
+                buttonExitActionPerformed(evt);
             }
         });
-        mainPanel.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, 50));
+        mainPanel.add(buttonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,17 +141,24 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hostBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hostBtnActionPerformed
+    private void buttonHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHostActionPerformed
+       
         switchToPanel(HOSTPANEL);
-    }//GEN-LAST:event_hostBtnActionPerformed
+    }//GEN-LAST:event_buttonHostActionPerformed
 
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_exitBtnActionPerformed
+    }//GEN-LAST:event_buttonExitActionPerformed
+
+    private void buttonPlayOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlayOnlineActionPerformed
+        switchToPanel(JOINPANEL);
+    }//GEN-LAST:event_buttonPlayOnlineActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonExit;
+    private javax.swing.JButton buttonHost;
+    private javax.swing.JButton buttonPlayOff;
     private javax.swing.JButton buttonPlayOnline;
-    private javax.swing.JButton exitBtn;
-    private javax.swing.JButton hostBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton offlineBtn;
     // End of variables declaration//GEN-END:variables
