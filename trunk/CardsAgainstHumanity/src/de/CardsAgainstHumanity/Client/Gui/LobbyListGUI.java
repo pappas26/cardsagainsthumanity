@@ -38,8 +38,9 @@ public class LobbyListGUI extends javax.swing.JPanel {
 
         } else {
             buttonBack.setText("back");
+            loadLobbys();
         }
-        loadLobbys();
+        
         int i = 0;
         for (JPanel jPanel : panels) {
             panelListContainer.add(jPanel, new AbsoluteConstraints(0, i * 85, -1, -1));
@@ -137,8 +138,10 @@ public class LobbyListGUI extends javax.swing.JPanel {
     }
 
     private void loadLobbys() {
-        if (panels.isEmpty() && !isHost) {
+        
+        if (panels.isEmpty()) {
             textAreaNews.setText("Keine News vorhanden");
         }
+        
     }
 }
