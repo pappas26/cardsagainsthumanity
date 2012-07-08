@@ -10,17 +10,32 @@
  */
 package de.CardsAgainstHumanity.Client.Gui;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author schlefix
  */
 public class LobbyPanel extends javax.swing.JPanel{
-
+    LobbyListGUI parent;
+    String name;
+    String gameMode;
+    int maxPlayer;
+    int curPlayer;
     /** Creates new form LobbyPanel */
-    public LobbyPanel() {
-        initComponents();
+    public LobbyPanel(LobbyListGUI parent,String name, int maxPlayer) {
+        this(parent, name, maxPlayer, "normal");
     }
-
+     public LobbyPanel(LobbyListGUI parent,String name, int maxPlayer,String mode) {
+        initComponents();
+        this.parent = parent;
+        this.name = name;
+        this.maxPlayer=maxPlayer;
+        this.gameMode=mode;
+        this.labelGametypeType.setText(gameMode);
+        this.labelLobbyName.setText(name);
+        this.labelPlayersNR.setText(curPlayer+"/"+maxPlayer);
+     }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -30,34 +45,90 @@ public class LobbyPanel extends javax.swing.JPanel{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        buttonJoin = new javax.swing.JButton();
+        labelLobbyName = new javax.swing.JLabel();
+        labelPlayers = new javax.swing.JLabel();
+        lableGametype = new javax.swing.JLabel();
+        buttonClose = new javax.swing.JButton();
+        labelPlayersNR = new javax.swing.JLabel();
+        labelGametypeType = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 51, 0));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setMinimumSize(new java.awt.Dimension(650, 80));
         setName("lobbyPanel"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(650, 70));
+        setPreferredSize(new java.awt.Dimension(650, 80));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 110, 40));
+        buttonJoin.setText("Join");
+        buttonJoin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonJoinActionPerformed(evt);
+            }
+        });
+        add(buttonJoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 110, 40));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Lobbyname");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, -1));
+        labelLobbyName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        labelLobbyName.setText("Lobbyname");
+        add(labelLobbyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, -1));
 
-        jLabel2.setText("Spieler:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        labelPlayers.setText("Spieler:");
+        add(labelPlayers, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jLabel3.setText("Runden:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        lableGametype.setText("Gametype:");
+        add(lableGametype, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        buttonClose.setText("Close");
+        buttonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCloseActionPerformed(evt);
+            }
+        });
+        add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 110, 40));
+
+        labelPlayersNR.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPlayersNR.setText("cur/max");
+        labelPlayersNR.setFocusable(false);
+        add(labelPlayersNR, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 100, -1));
+
+        labelGametypeType.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelGametypeType.setText("normal");
+        add(labelGametypeType, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
+        parent.removeLobby(this);
+        
+        //TODO KILL LOBBY
+    }//GEN-LAST:event_buttonCloseActionPerformed
+
+    private void buttonJoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonJoinActionPerformed
+        if(curPlayer<maxPlayer){
+            curPlayer++;
+            
+            //TODO JOIN GAME!
+        }
+    }//GEN-LAST:event_buttonJoinActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton buttonClose;
+    private javax.swing.JButton buttonJoin;
+    private javax.swing.JLabel labelGametypeType;
+    private javax.swing.JLabel labelLobbyName;
+    private javax.swing.JLabel labelPlayers;
+    private javax.swing.JLabel labelPlayersNR;
+    private javax.swing.JLabel lableGametype;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        this.labelGametypeType.setText(gameMode);
+        this.labelLobbyName.setText(name);
+        this.labelPlayersNR.setText(curPlayer+"/"+maxPlayer);
+        super.paintComponent(g);
+        
+    }
+
+    
+
 }
