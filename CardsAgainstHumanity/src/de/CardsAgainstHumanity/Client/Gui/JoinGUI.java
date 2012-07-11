@@ -22,6 +22,6 @@ public class JoinGUI extends HostGUI {
     }
 
     private void buttonJoinServerActionPerformed(ActionEvent evt) {
-    parent.switchToPanel(MainGUI.LOBBYLISTJOINPANEL);
+        parent.switchToPanel(MainGUI.LOBBYLISTJOINPANEL);
     }
 }
